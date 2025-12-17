@@ -1,0 +1,92 @@
+<?php
+// index.php - converted from index.html
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSIT Department - Home</title>
+  <link rel="stylesheet" href="index.css">
+
+  <!-- BLOCK HOME PAGE IF LOGGED IN -->
+  <script>
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      window.location.href = "about.php";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="container nav">
+        <h2 class="logo">BSIT Department</h2>
+        <nav>
+          <a href="index.php">Home</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Welcome to BSIT Department</h1>
+          <p>Empowering future IT professionals through technology and innovation.</p>
+          <a href="javascript:void(0)" class="btn" id="loginBtn">Get Started →</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+
+        <form id="loginForm">
+          <label>Username:</label>
+          <input type="text" placeholder="Enter your username" required>
+
+          <label>Password:</label>
+          <input type="password" placeholder="Enter your password" required>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 BSIT Department — All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById("loginBtn");
+    const loginModal = document.getElementById("loginModal");
+    const loginForm = document.getElementById("loginForm");
+    const closeBtn = document.querySelector(".close");
+
+    loginBtn.onclick = () => {
+      loginModal.style.display = "block";
+    };
+
+    closeBtn.onclick = () => {
+      loginModal.style.display = "none";
+    };
+
+    window.onclick = (e) => {
+      if (e.target === loginModal) {
+        loginModal.style.display = "none";
+      }
+    };
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      localStorage.setItem("isLoggedIn", "true");
+      window.location.href = "about.php";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+/* ------------------ GLOBAL ------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  height: 100%; /* required for sticky footer */
+  margin: 0;
+  background: #f4f7fc;
+  color: #333;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+}
+
+main {
+  flex: 1; /* main content expands to push footer down */
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Ensure page wrapper stretches so footer can be pushed to bottom */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------ HEADER & NAV ------------------ */
+header {
+  background: #002d72;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  color: #fff;
+  font-size: 1.9rem;
+  font-weight: bold;
+}
+
+/* Desktop nav: use flex so links align consistently */
+header .container nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+nav a {
+  color: goldenrod;
+  margin-left: 0;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  background-color: rgb(50, 48, 48);
+}
+
+/* Ensure `.active` does not force the hover background; keep a subtle indicator if desired */
+nav a.active {
+  background-color: transparent;
+}
+/* ------------------ PAGE TRANSITION EFFECT ------------------ */
+.page-transition {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ------------------ HERO SECTION ------------------ */
+.hero {
+  background: url(hero.jpg) no-repeat center center; /* center and no repeat */
+  background-size: cover; /* fill the section fully */
+  width: 100%;
+  height: 90vh;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gold;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.hero .btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #004a9f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.hero .btn:hover {
+  background: #001c46;
+}
+
+/* ------------------ PAGE BANNER ------------------ */
+.page-banner {
+  background: #002d72;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ------------------ CONTENT SECTIONS ------------------ */
+section {
+  padding: 30px 0;
+}
+
+/* ------------------ GRID LAYOUT ------------------ */
+.grid, .faculty-grid, .org-cards, .achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+/* ------------------ FEATURE CARDS ------------------ */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  color: #002d72;
+  margin-bottom: 10px;
+}
+
+ html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hide protected links until login */
+.protected {
+  display: none;
+}
+
+    /* Log in */
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px); /* blur effect sa background */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #e60000;
+}
+
+
+
+/* ------------------ ANNOUNCEMENTS ------------------ */
+
+.announcements-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
+  gap: 25px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.announcement-card {
+  background: skyblue;
+  padding: 20px;
+  border-radius: 10px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.announcement-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.announcement-content h3 {
+  color: #002d72;
+  margin-bottom: 5px;
+}
+
+.announcement-content p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.announcement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ------------------ EVENTS ------------------ */
+
+.events-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
+  gap: 25px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.event-card {
+  background: skyblue;
+  padding: 20px;
+  border-radius: 10px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.event-card h3 {
+  color: #002d72;
+  margin-bottom: 5px;
+}
+
+.event-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+/* ------------------ FACULTY CARDS ------------------ */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.profile-box {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.profile-box img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+    
+/* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background-color: rgb(187, 227, 251);
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .modal-content button:hover {
+      background: #e60000;
+    }
+  
+.faculty-card img {
+  width: 100%;         
+  height: 200px;       
+  object-fit: cover;    
+  border-radius: 8px;   
+  margin-bottom: 10px;
+}
+
+.faculty-card {
+  background: rgb(148, 192, 206);
+  width: 225px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faculty-card h3 {
+  margin: 10px 0 5px;
+  color: #002d72;
+}
+
+.faculty-card p {
+  font-size: 0.9rem;
+}
+
+.faculty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ------------------ ORGANIZATION CARDS ------------------ */
+.org-card {
+  background: skyblue;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  border: 2px solid #002d72;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.org-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.org-card h3 {
+  margin-bottom: 10px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card {
+  width: 90%;          /* relative sa screen */
+  max-width: 800px;    /* dili molapas sa 800px */
+  margin: 20px auto;   /* center sa page */
+}
+
+
+/* Optional hover effect para mas “alive” */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ------------------ CONTACT FORM ------------------ */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+}
+
+button {
+  padding: 12px 22px;
+  background: #002d72;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background: #001c46;
+}
+.overlay {
+  display: none;   /* IMPORTANT kaayo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.thank-you-card {
+  background: #ffffff;
+  padding: 30px;
+  max-width: 360px;
+  width: 90%;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.thank-you-card .icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #e6f7ee;
+  color: #2ecc71;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thank-you-card h3 {
+  margin: 10px 0;
+  font-size: 22px;
+}
+
+.thank-you-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+
+/* ------------------ FOOTER ------------------ */
+footer {
+  width: 100%;
+  background: #002d72;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto; /* push to bottom when wrapper is flex column */
+}
+
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  nav a {
+    margin-left: 8px;
+    font-size: 0.9rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero {
+    height: 80vh;
+  }
+
+  .grid, .faculty-grid, .org-cards, .achievements-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header .logo {
+    font-size: 1.5rem;
+  }
+}   
+
+
+    /* Hamburger styles */
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    .hamburger-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .hamburger-menu button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #d32f2f;
+    }
+
+    .hamburger-menu button:hover {
+      text-decoration: underline;
+    }
+
+    .section-title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+    /* ------------------ MOBILE ENHANCEMENTS ------------------ */
+    /* Improve layout and touch targets on smaller screens */
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      nav a {
+        padding: 10px 12px;
+        margin-left: 0;
+        background: transparent;
+        width: auto;
+      }
+
+      .container { width: 94%; }
+
+      /* make the grid single-column for narrow screens */
+      .grid, .events-wrapper, .announcements-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        justify-items: center;
+      }
+
+      /* full-width cards with comfortable padding */
+      .announcement-card, .event-card, .card {
+        width: 100%;
+        max-width: 560px;
+        padding: 16px;
+      }
+
+      /* make form controls easier to tap */
+      form { padding: 16px; }
+      form input[type="text"], form input[type="date"], form textarea, form input[type="file"], .modal-content input {
+        font-size: 16px;
+        padding: 12px;
+      }
+
+      form .btn, .hero .btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    @media (max-width: 420px) {
+      header .logo { font-size: 1.25rem; }
+      nav a { font-size: 0.95rem; padding: 8px; }
+      .announcement-card img, .event-card img { height: 140px; }
+      .announcement-content h3, .event-card h3 { font-size: 1.05rem; }
+    }
+
